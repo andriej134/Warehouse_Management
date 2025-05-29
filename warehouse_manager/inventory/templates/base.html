@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Warehouse Manager{% endblock %}</title>
+</head>
+<body>
+  <nav>
+    {% if user.is_authenticated %}
+      Witaj, {{ user.username }}!
+      <a href="{% url 'account_logout' %}">Wyloguj</a>
+    {% else %}
+      <a href="{% url 'account_login' %}">Logowanie</a> |
+      <a href="{% url 'account_signup' %}">Rejestracja</a>
+    {% endif %}
+  </nav>
+  <hr>
+  {% block content %}{% endblock %}
+</body>
+</html>

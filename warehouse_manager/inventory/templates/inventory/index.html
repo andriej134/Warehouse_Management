@@ -29,38 +29,52 @@
     </script>
 </head>
 <body class="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-blue-50">
-    <!-- Navigation -->
-    <nav class="bg-gradient-to-r from-ocean-800 to-ocean-900 shadow-xl fixed w-full z-20 backdrop-blur-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center space-x-3">
-                    <div class="w-8 h-8 bg-ocean-400 rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
-                        </svg>
-                    </div>
-                    <a href="#" class="text-white font-bold text-xl tracking-wide">E-Posejdon Menadżer</a>
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-1">
-                        <a href="#" class="text-ocean-100 hover:text-white hover:bg-ocean-700 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105">Strona główna</a>
-                        <a href="#" class="text-ocean-200 hover:text-white hover:bg-ocean-700 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105">Produkty</a>
-                        <a href="#" class="text-ocean-200 hover:text-white hover:bg-ocean-700 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105">Kategorie</a>
-                        <a href="#" class="text-ocean-200 hover:text-white hover:bg-ocean-700 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105">Raporty</a>
-                        <a href="#" class="text-ocean-200 hover:text-white hover:bg-ocean-700 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105">Ustawienia</a>
-                    </div>
-                </div>
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button class="text-ocean-200 hover:text-white p-2">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
+   <!-- Navigation -->
+<nav class="bg-gradient-to-r from-ocean-800 to-ocean-900 shadow-xl fixed w-full z-20 backdrop-blur-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 bg-ocean-400 rounded-lg flex items-center justify-center">
+          <!-- ikona -->
         </div>
-    </nav>
+        <a href="#" class="text-white font-bold text-xl tracking-wide">E-Posejdon Menadżer</a>
+      </div>
+
+      <!-- desktop menu + login/register -->
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="#" class="text-ocean-200 hover:text-white hover:bg-ocean-700 px-4 py-2 rounded-lg text-sm font-medium">
+          Strona główna
+        </a>
+        <!-- inne linki… -->
+        
+        <!-- DODANE PRZYCISKI -->
+        {% if user.is_authenticated %}
+          <a href="{% url 'account_logout' %}"
+             class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
+            Wyloguj
+          </a>
+        {% else %}
+          <a href="{% url 'account_login' %}"
+             class="bg-ocean-500 hover:bg-ocean-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
+            Zaloguj się
+          </a>
+          <a href="{% url 'account_signup' %}"
+             class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
+            Zarejestruj się
+          </a>
+        {% endif %}
+        <!-- KONIEC DODANYCH PRZYCISKÓW -->
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button class="text-ocean-200 hover:text-white p-2">
+          <!-- ikona burgera -->
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
 
     <!-- Main Content -->
     <div class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-8">
