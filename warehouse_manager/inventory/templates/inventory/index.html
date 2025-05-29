@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warehouse Manager</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'inventory:index' %}">Home</a></li>
+            <li><a href="{% url 'inventory:products' %}">Products</a></li>
+            <li><a href="{% url 'inventory:categories' %}">Categories</a></li>
+            <li><a href="{% url 'inventory:reports' %}">Reports</a></li>
+            <li><a href="{% url 'inventory:settings' %}">Settings</a></li>
+        </ul>
+    </nav>
+    <header>
+        <h1>Welcome to the Warehouse Manager</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Inventory Overview</h2>
+            <p>Manage your warehouse inventory efficiently.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Warehouse Manager</p>
+    </footer>
+</body>
+</html>
