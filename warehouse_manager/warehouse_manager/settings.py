@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     # dopisz tu providerów, np.:
     # 'allauth.socialaccount.providers.google',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 # --------------------------------------
 
@@ -97,3 +99,6 @@ USE_TZ        = True
 STATIC_URL        = '/static/'
 STATICFILES_DIRS  = [ BASE_DIR / "static" ]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_ALLOWED_TEMPLATE_PACKS = ["bootstrap5"]
