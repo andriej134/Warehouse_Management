@@ -1,10 +1,18 @@
 {% extends "base.html" %}
-{% block title %}Rejestracja{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block title %}Rejestracja – E-Posejdon{% endblock %}
+
 {% block content %}
-  <h1>Rejestracja</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Załóż konto</button>
-  </form>
+  <div class="max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg">
+    <h2 class="text-2xl font-bold mb-4">Rejestracja</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button type="submit"
+              class="w-full mt-4 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg">
+        Załóż konto
+      </button>
+    </form>
+  </div>
 {% endblock %}

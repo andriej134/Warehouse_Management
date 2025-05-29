@@ -1,10 +1,18 @@
 {% extends "base.html" %}
-{% block title %}Logowanie{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block title %}Logowanie – E-Posejdon{% endblock %}
+
 {% block content %}
-  <h1>Logowanie</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Zaloguj się</button>
-  </form>
+  <div class="max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg">
+    <h2 class="text-2xl font-bold mb-4">Logowanie</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button type="submit"
+              class="w-full mt-4 bg-ocean-500 hover:bg-ocean-600 text-white py-2 rounded-lg">
+        Zaloguj się
+      </button>
+    </form>
+  </div>
 {% endblock %}

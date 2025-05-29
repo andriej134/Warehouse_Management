@@ -54,7 +54,6 @@ ROOT_URLCONF = 'warehouse_manager.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # jeżeli masz własny folder globalny: BASE_DIR/'templates'
         'DIRS': [ BASE_DIR / 'templates' ],
         'APP_DIRS': True,
         'OPTIONS': {
