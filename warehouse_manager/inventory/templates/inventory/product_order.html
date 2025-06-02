@@ -10,29 +10,50 @@
         <form method="post" class="space-y-6">
             {% csrf_token %}
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Nagłówki kolumn dla widoku desktop -->
+            <div class="hidden md:grid grid-cols-4 gap-6 mb-4">
+                <div class="font-medium text-gray-700">Typ anemostatu</div>
+                <div class="font-medium text-gray-700">Ilość do złożenia</div>
+                <div class="font-medium text-gray-700">Ilość wyprodukowana</div>
+                <div class="font-medium text-gray-700">Data produkcji</div>
+            </div>
+            
+            <!-- Wiersz formularza -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Typ anemostatu -->
                 <div>
-                    <label for="product" class="block text-sm font-medium text-gray-700 mb-1">Wybierz produkt</label>
-                    <select id="product" name="product" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500">
-                        <option value="">-- Wybierz produkt --</option>
-                        <!-- Tutaj dynamicznie wypełnij opcje produktów -->
+                    <label for="anemostat_type" class="block text-sm font-medium text-gray-700 mb-1 md:hidden">Typ anemostatu</label>
+                    <select id="anemostat_type" name="anemostat_type" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500">
+                        <option value="">-- Wybierz typ --</option>
+                        <option value="okragly">Anemostat okrągły</option>
+                        <option value="kwadratowy">Anemostat kwadratowy</option>
+                        <option value="prostokatny">Anemostat prostokątny</option>
+                        <option value="liniowy">Anemostat liniowy</option>
                     </select>
                 </div>
                 
+                <!-- Ilość do złożenia -->
                 <div>
-                    <label for="quantity" class="block text-sm font-medium text-gray-700 mb-1">Ilość</label>
-                    <input type="number" id="quantity" name="quantity" min="1" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500">
+                    <label for="quantity_to_assemble" class="block text-sm font-medium text-gray-700 mb-1 md:hidden">Ilość do złożenia</label>
+                    <input type="number" id="quantity_to_assemble" name="quantity_to_assemble" min="0" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500" placeholder="0">
+                </div>
+                
+                <!-- Ilość wyprodukowana -->
+                <div>
+                    <label for="quantity_produced" class="block text-sm font-medium text-gray-700 mb-1 md:hidden">Ilość wyprodukowana</label>
+                    <input type="number" id="quantity_produced" name="quantity_produced" min="0" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500" placeholder="0">
+                </div>
+                
+                <!-- Data produkcji -->
+                <div>
+                    <label for="production_date" class="block text-sm font-medium text-gray-700 mb-1 md:hidden">Data produkcji</label>
+                    <input type="date" id="production_date" name="production_date" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500">
                 </div>
             </div>
             
-            <div>
-                <label for="notes" class="block text-sm font-medium text-gray-700 mb-1">Uwagi</label>
-                <textarea id="notes" name="notes" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500"></textarea>
-            </div>
-            
-            <div class="flex justify-end">
+            <div class="flex justify-end mt-8">
                 <button type="submit" class="bg-ocean-600 hover:bg-ocean-700 text-white px-6 py-3 rounded-xl font-medium transition-all duration-200 transform hover:scale-105 shadow-lg">
-                    Złóż zamówienie
+                    Zatwierdź
                 </button>
             </div>
         </form>
