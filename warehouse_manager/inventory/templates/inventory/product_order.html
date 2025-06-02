@@ -11,24 +11,59 @@
             {% csrf_token %}
             
             <!-- Nagłówki kolumn dla widoku desktop -->
-            <div class="hidden md:grid grid-cols-4 gap-6 mb-4">
-                <div class="font-medium text-gray-700">Typ anemostatu</div>
-                <div class="font-medium text-gray-700">Ilość do złożenia</div>
-                <div class="font-medium text-gray-700">Ilość wyprodukowana</div>
-                <div class="font-medium text-gray-700">Data produkcji</div>
+            <div class="hidden md:grid grid-cols-7 gap-6 mb-7">
+                <div class="font-medium text-gray-700">Średnica montażowa anemostatu:</div>
+                <div class="font-medium text-gray-700">Kształt anemostatu:</div>
+                <div class="font-medium text-gray-700">Rozmiar anemostatu:</div>
+                <div class="font-medium text-gray-700">Kolor anemostatu:</div>    
+                <div class="font-medium text-gray-700">Ilość do złożenia:</div>
+                <div class="font-medium text-gray-700">Ilość wyprodukowana:</div>
+                <div class="font-medium text-gray-700">Data produkcji:</div>
             </div>
             
             <!-- Wiersz formularza -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <!-- Typ anemostatu -->
+            <div class="grid grid-cols-1 md:grid-cols-7 gap-6">
+                <!-- Średnica montażowa anemostatu -->
                 <div>
-                    <label for="anemostat_type" class="block text-sm font-medium text-gray-700 mb-1 md:hidden">Typ anemostatu</label>
-                    <select id="anemostat_type" name="anemostat_type" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500">
-                        <option value="">-- Wybierz typ --</option>
-                        <option value="okragly">Anemostat okrągły</option>
-                        <option value="kwadratowy">Anemostat kwadratowy</option>
-                        <option value="prostokatny">Anemostat prostokątny</option>
-                        <option value="liniowy">Anemostat liniowy</option>
+                    <label for="diffuser_diameter" class="block text-sm font-medium text-gray-700 mb-1 md:hidden">Średnica montażowa anemostatu</label>
+                    <select id="diffuser_diameter" name="diffuser_type" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500">
+                        <option value="">- Wybierz -</option>
+                        <option value="fi_100">⌀100</option>
+                        <option value="fi_125">⌀125</option>
+                        <option value="fi_160">⌀160</option>
+                    </select>
+                </div>
+
+                <!-- Kształt anemostatu -->
+                <div>
+                    <label for="diffuser_shape" class="block text-sm font-medium text-gray-700 mb-1 md:hidden">Kształt anemostatu</label>
+                    <select id="diffuser_shape" name="diffuser_shape" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500">
+                        <option value="">- Wybierz -</option>
+                        <option value="shape_circle">Okrągły</option>
+                        <option value="shape_rectangle">Kwadratowy</option>
+                        <option value="shape_custom">Niestandardowy</option>
+                    </select>
+                </div>
+
+                <!-- Rozmiar anemostatu -->
+                <div>
+                    <label for="diffuser_size" class="block text-sm font-medium text-gray-700 mb-1 md:hidden">Rozmiar anemostatu</label>
+                    <select id="diffuser_size" name="diffuser_size" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500">
+                        <option value="">- Wybierz -</option>
+                        <option value="shape_circle">S</option>
+                        <option value="shape_rectangle">M</option>
+                        <option value="shape_custom">L</option>
+                    </select>
+                </div>
+
+                <!-- Kolor anemostatu -->
+                <div>
+                    <label for="diffuser_color" class="block text-sm font-medium text-gray-700 mb-1 md:hidden">Kolor anemostatu</label>
+                    <select id="diffuser_color" name="diffuser_color" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500">
+                        <option value="">- Wybierz -</option>
+                        <option value="color_white">Biały</option>
+                        <option value="color_black">Czarny</option>
+                        <option value="color_gold">Złoty</option>
                     </select>
                 </div>
                 
