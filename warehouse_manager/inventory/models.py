@@ -23,10 +23,6 @@ class Product(models.Model):
         ('160', '160'),
     ]
 
-
-
-
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     diameter = models.DecimalField(max_digits=6, decimal_places=2)
@@ -54,3 +50,14 @@ class Inventory(models.Model):
 
     def __str__(self):
         return f"{self.product.name} - {self.stock_level}"
+
+class Order(models.Model):
+    diameter = models.CharField(max_length=10)
+    shape = models.CharField(max_length=20)
+    size = models.CharField(max_length=2)
+    color = models.CharField(max_length=50)
+    quantity_to_assemble = models.PositiveIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Zamówienie: {self.diameter}, {self.shape}, {self.size}, {self.color}, ilość: {self.quantity_to_assemble}"
