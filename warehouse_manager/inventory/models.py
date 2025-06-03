@@ -1,32 +1,43 @@
 from django.db import models
 
 class Product(models.Model):
-    KSZTALT_CHOICES = [
+    SHAPE_CHOICES = [
         ('okrągły', 'Okrągły'),
         ('kwadratowy', 'Kwadratowy'),
         ('niestandardowy', 'Niestandardowy'),
     ]
-    ROZMIAR_CHOICES = [
+    SIZE_CHOICES = [
         ('S', 'S'),
         ('M', 'M'),
         ('L', 'L'),
     ]
-    
-    name = models.CharField(max_length=255)
-    description = models.TextField(blank=True)
-    quantity = models.PositiveIntegerField(default=0)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    COLOR_CHOICES = [
+        ('W', 'W'),
+        ('B', 'B'),
+        ('G', 'G'),
+    ]
+
+    DIAMETER_CHOICES = [
+        ('100', '100'),
+        ('125', '125'),
+        ('160', '160'),
+    ]
+
+
+
+
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    srednica = models.DecimalField(max_digits=6, decimal_places=2)
-    ksztalt = models.CharField(max_length=20, choices=KSZTALT_CHOICES)
-    rozmiar = models.CharField(max_length=2, choices=ROZMIAR_CHOICES)
-    kolor = models.CharField(max_length=50)
+    diameter = models.DecimalField(max_digits=6, decimal_places=2)
+    shape = models.CharField(max_length=20, choices=SHAPE_CHOICES)
+    size = models.CharField(max_length=2, choices=SIZE_CHOICES)
+    color = models.CharField(max_length=50, choices=COLOR_CHOICES)
 
     
 
     def __str__(self):
-        return f"{self.ksztalt} {self.rozmiar} {self.kolor} ({self.srednica} mm)"
+        return f"{self.shape} {self.size} {self.color} ({self.diameter} mm)"
 
 class Supplier(models.Model):
     name = models.CharField(max_length=255)

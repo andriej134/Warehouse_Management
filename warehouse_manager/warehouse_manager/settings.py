@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.google',
     'crispy_forms',
     'crispy_bootstrap5',
+    'grappelli',
 ]
 # --------------------------------------
 

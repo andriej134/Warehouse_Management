@@ -6,11 +6,8 @@
 <div class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-8">
     <section class="bg-white shadow-2xl rounded-3xl p-8 border border-gray-100">
         <h1 class="text-3xl font-bold text-gray-800 mb-8">Formularz zamówienia produktu</h1>
-        
         <form method="post" class="space-y-6">
             {% csrf_token %}
-            
-            <!-- Nagłówki kolumn dla widoku desktop -->
             <div class="hidden md:grid grid-cols-7 gap-6 mb-7">
                 <div class="font-medium text-gray-700">Średnica montażowa anemostatu:</div>
                 <div class="font-medium text-gray-700">Kształt anemostatu:</div>
@@ -20,72 +17,61 @@
                 <div class="font-medium text-gray-700">Ilość wyprodukowana:</div>
                 <div class="font-medium text-gray-700">Data produkcji:</div>
             </div>
-            
-            <!-- Wiersz formularza -->
             <div class="grid grid-cols-1 md:grid-cols-7 gap-6">
                 <!-- Średnica montażowa anemostatu -->
                 <div>
                     <label for="diffuser_diameter" class="block text-sm font-medium text-gray-700 mb-1 md:hidden">Średnica montażowa anemostatu</label>
-                    <select id="diffuser_diameter" name="diffuser_type" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500">
+                    <select id="diffuser_diameter" name="diffuser_diameter" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500">
                         <option value="">- Wybierz -</option>
-                        <option value="fi_100">⌀100</option>
-                        <option value="fi_125">⌀125</option>
-                        <option value="fi_160">⌀160</option>
+                        {% for diameter in diameters %}
+                            <option value="{{ diameter }}">{{ diameter }}</option>
+                        {% endfor %}
                     </select>
                 </div>
-
                 <!-- Kształt anemostatu -->
                 <div>
                     <label for="diffuser_shape" class="block text-sm font-medium text-gray-700 mb-1 md:hidden">Kształt anemostatu</label>
                     <select id="diffuser_shape" name="diffuser_shape" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500">
                         <option value="">- Wybierz -</option>
-                        <option value="shape_circle">Okrągły</option>
-                        <option value="shape_rectangle">Kwadratowy</option>
-                        <option value="shape_custom">Niestandardowy</option>
+                        {% for shape in shapes %}
+                            <option value="{{ shape }}">{{ shape }}</option>
+                        {% endfor %}
                     </select>
                 </div>
-
                 <!-- Rozmiar anemostatu -->
                 <div>
                     <label for="diffuser_size" class="block text-sm font-medium text-gray-700 mb-1 md:hidden">Rozmiar anemostatu</label>
                     <select id="diffuser_size" name="diffuser_size" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500">
                         <option value="">- Wybierz -</option>
-                        <option value="shape_circle">S</option>
-                        <option value="shape_rectangle">M</option>
-                        <option value="shape_custom">L</option>
+                        {% for size in sizes %}
+                            <option value="{{ size }}">{{ size }}</option>
+                        {% endfor %}
                     </select>
                 </div>
-
                 <!-- Kolor anemostatu -->
                 <div>
                     <label for="diffuser_color" class="block text-sm font-medium text-gray-700 mb-1 md:hidden">Kolor anemostatu</label>
                     <select id="diffuser_color" name="diffuser_color" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500">
                         <option value="">- Wybierz -</option>
-                        <option value="color_white">Biały</option>
-                        <option value="color_black">Czarny</option>
-                        <option value="color_gold">Złoty</option>
+                        {% for color in colors %}
+                            <option value="{{ color }}">{{ color }}</option>
+                        {% endfor %}
                     </select>
                 </div>
-                
-                <!-- Ilość do złożenia -->
+                <!-- Pozostałe pola bez zmian -->
                 <div>
                     <label for="quantity_to_assemble" class="block text-sm font-medium text-gray-700 mb-1 md:hidden">Ilość do złożenia</label>
                     <input type="number" id="quantity_to_assemble" name="quantity_to_assemble" min="0" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500" placeholder="0">
                 </div>
-                
-                <!-- Ilość wyprodukowana -->
                 <div>
                     <label for="quantity_produced" class="block text-sm font-medium text-gray-700 mb-1 md:hidden">Ilość wyprodukowana</label>
                     <input type="number" id="quantity_produced" name="quantity_produced" min="0" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500" placeholder="0">
                 </div>
-                
-                <!-- Data produkcji -->
                 <div>
                     <label for="production_date" class="block text-sm font-medium text-gray-700 mb-1 md:hidden">Data produkcji</label>
                     <input type="date" id="production_date" name="production_date" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-ocean-500 focus:border-ocean-500">
                 </div>
             </div>
-            
             <div class="flex justify-end mt-8">
                 <button type="submit" class="bg-ocean-600 hover:bg-ocean-700 text-white px-6 py-3 rounded-xl font-medium transition-all duration-200 transform hover:scale-105 shadow-lg">
                     Zatwierdź

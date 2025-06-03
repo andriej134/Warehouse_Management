@@ -9,8 +9,7 @@ urlpatterns = [
     path('', include('inventory.urls')),
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
-
-
+    path('grappelli/', include('grappelli.urls')),
 ]
 
 admin.site.site_header = "AFDynamic – Panel administracyjny"
