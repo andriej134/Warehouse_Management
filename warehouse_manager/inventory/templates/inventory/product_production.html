@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Produkcja produktów{% endblock %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-6">Zamówienia do produkcji</h1>
+{% if orders %}
+    <table class="min-w-full bg-white rounded-xl shadow border mb-8">
+        <thead>
+            <tr>
+                <th class="px-4 py-2">Średnica</th>
+                <th class="px-4 py-2">Kształt</th>
+                <th class="px-4 py-2">Rozmiar</th>
+                <th class="px-4 py-2">Kolor</th>
+                <th class="px-4 py-2">Ilość</th>
+                <th class="px-4 py-2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr class="border-t">
+                <td class="px-4 py-2">{{ order.diameter }}</td>
+                <td class="px-4 py-2">{{ order.shape }}</td>
+                <td class="px-4 py-2">{{ order.size }}</td>
+                <td class="px-4 py-2">{{ order.color }}</td>
+                <td class="px-4 py-2">{{ order.quantity_to_assemble }}</td>
+                <td class="px-4 py-2 text-center">
+                    <form method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="order_id" value="{{ order.id }}">
+                        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded font-bold">Zatwierdź produkcję</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Brak zamówień do produkcji.</p>
+{% endif %}
+{% endblock %}

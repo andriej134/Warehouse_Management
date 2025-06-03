@@ -60,6 +60,8 @@ class Order(models.Model):
     color = models.CharField(max_length=50)
     quantity_to_assemble = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
+    is_produced = models.BooleanField(default=False)
+    produced_at = models.DateTimeField(null=True, blank=True)
 
     def clean(self):
         errors = {}

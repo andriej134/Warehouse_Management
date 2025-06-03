@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from .models import Product, Order
+from django.utils import timezone
 
 
 
@@ -49,3 +50,14 @@ def delete_order(request, order_id):
         order = get_object_or_404(Order, id=order_id)
         order.delete()
     return redirect("inventory:product_order")
+
+def product_production(request):
+    orders = Order.objects.filter(is_produced=False).order_by('created_at')
+    if request.method == "POST":
+        order_id = request.POST.get("order_id")
+        order = get_object_or_404(Order, id=order_id)
+        order.is_produced = True
+        order.produced_at = timezone.now()
+        order.save()
+        return redirect("inventory:product_production")
+    return render(request, "inventory/product_production.html", {"orders": orders})
