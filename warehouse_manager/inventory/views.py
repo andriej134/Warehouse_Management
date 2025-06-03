@@ -24,19 +24,20 @@ def product_order(request):
             quantity_to_assemble=request.POST.get("quantity_to_assemble") or 0,
         )
         try:
-            order.full_clean()  # WALIDACJA
+            order.full_clean()
             order.save()
             return redirect("inventory:product_order")
         except ValidationError as e:
-            errors = e.message_dict
+            errors = e.message_dict  # <-- przekazujesz błędy
 
-    orders = Order.objects.order_by('-created_at')[:10]  # ostatnie 10 zamówień
+    orders = Order.objects.order_by('-created_at')[:10]
     return render(request, 'inventory/product_order.html', {
         'diameters': diameters,
         'shapes': shapes,
         'sizes': sizes,
         'colors': colors,
         'orders': orders,
+        'errors': errors,  # <-- zawsze przekazujesz errors
     })
 
 @login_required
