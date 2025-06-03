@@ -12,3 +12,7 @@ urlpatterns = [
 
 
 ]
+
+admin.site.site_header = "AFDynamic – Panel administracyjny"
+admin.site.site_title = "AFDynamic Admin"
+admin.site.index_title = "Administracja stroną"
