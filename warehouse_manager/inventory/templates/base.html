@@ -68,7 +68,8 @@
           <!-- inne linki… -->
           {% if user.is_authenticated %}
           <a href="{% url 'inventory:product_order' %}" class="text-ocean-200 hover:text-white px-4 py-2 rounded-lg">Zamówienia</a>
-            <a href="{% url 'account_logout' %}"
+          <a href="{% url 'inventory:product_production' %}" class="text-ocean-200 hover:text-white px-4 py-2 rounded-lg">Produkcja</a>  
+          <a href="{% url 'account_logout' %}"
                class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Wyloguj</a>
           {% else %}
             <a href="{% url 'account_login' %}"

@@ -53,6 +53,7 @@ def delete_order(request, order_id):
 
 def product_production(request):
     orders = Order.objects.filter(is_produced=False).order_by('created_at')
+    produced_orders = Order.objects.filter(is_produced=True).order_by('-produced_at')[:10]
     if request.method == "POST":
         order_id = request.POST.get("order_id")
         order = get_object_or_404(Order, id=order_id)
@@ -60,4 +61,7 @@ def product_production(request):
         order.produced_at = timezone.now()
         order.save()
         return redirect("inventory:product_production")
-    return render(request, "inventory/product_production.html", {"orders": orders})
+    return render(request, "inventory/product_production.html", {
+        "orders": orders,
+        "produced_orders": produced_orders,
+    })
