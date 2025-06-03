@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+
 
 class Product(models.Model):
     SHAPE_CHOICES = [
@@ -58,6 +60,21 @@ class Order(models.Model):
     color = models.CharField(max_length=50)
     quantity_to_assemble = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def clean(self):
+        errors = {}
+        if not self.diameter:
+            errors['diameter'] = "To pole jest wymagane."
+        if not self.shape:
+            errors['shape'] = "To pole jest wymagane."
+        if not self.size:
+            errors['size'] = "To pole jest wymagane."
+        if not self.color:
+            errors['color'] = "To pole jest wymagane."
+        if not self.quantity_to_assemble or self.quantity_to_assemble <= 0:
+            errors['quantity_to_assemble'] = "Ilość musi być liczbą dodatnią większą od zera."
+        if errors:
+            raise ValidationError(errors)
 
     def __str__(self):
         return f"Zamówienie: {self.diameter}, {self.shape}, {self.size}, {self.color}, ilość: {self.quantity_to_assemble}"

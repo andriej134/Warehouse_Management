@@ -71,4 +71,39 @@
         </form>
     </section>
 </div>
+
+{% if orders %}
+    <h2 class="text-xl font-bold mt-8 mb-4">Ostatnie zamówienia:</h2>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white rounded-xl shadow border">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2">Średnica</th>
+                    <th class="px-4 py-2">Kształt</th>
+                    <th class="px-4 py-2">Rozmiar</th>
+                    <th class="px-4 py-2">Kolor</th>
+                    <th class="px-4 py-2">Ilość</th>
+                    <th class="px-4 py-2"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr class="border-t">
+                    <td class="px-4 py-2">{{ order.diameter }}</td>
+                    <td class="px-4 py-2">{{ order.shape }}</td>
+                    <td class="px-4 py-2">{{ order.size }}</td>
+                    <td class="px-4 py-2">{{ order.color }}</td>
+                    <td class="px-4 py-2">{{ order.quantity_to_assemble }}</td>
+                    <td class="px-4 py-2 text-center">
+                        <form method="post" action="{% url 'inventory:delete_order' order.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="text-red-600 font-bold hover:text-red-800" title="Usuń zamówienie" onclick="return confirm('Na pewno usunąć to zamówienie?')">✕</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
 {% endblock %}
