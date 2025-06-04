@@ -12,6 +12,6 @@ urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
 ]
 
-admin.site.site_header = "AFDynamic – Panel administracyjny"
-admin.site.site_title = "AFDynamic Admin"
+admin.site.site_header = "E-Posejdon ERP – Panel administracyjny"
+admin.site.site_title = "E-Posejdon ERP Admin"
 admin.site.index_title = "Administracja stroną"
