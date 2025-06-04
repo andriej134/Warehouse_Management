@@ -118,40 +118,50 @@
     </div>
   </footer>
 
-  {% block extra_scripts %}
+{% block extra_scripts %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Obsługa customowego potwierdzenia dla wszystkich przycisków z klasą .custom-confirm
-  let modal = document.getElementById('custom-confirm-modal');
-  let yesBtn = document.getElementById('custom-confirm-yes');
-  let noBtn = document.getElementById('custom-confirm-no');
-  let formToSubmit = null;
+  // Obsługa customowego potwierdzenia tylko dla formularza zamówienia
+  const form = document.querySelector('form');
+  const btn = document.getElementById('order-submit-btn');
+  const modal = document.getElementById('custom-confirm-modal');
+  const yesBtn = document.getElementById('custom-confirm-yes');
+  const noBtn = document.getElementById('custom-confirm-no');
+  let submitAfterConfirm = false;
 
-  document.querySelectorAll('form .custom-confirm').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      formToSubmit = btn.closest('form');
-      modal.classList.remove('hidden');
+  if (form && btn && modal && yesBtn && noBtn) {
+    form.addEventListener('submit', function(e) {
+      // Jeśli już potwierdzono, pozwól wysłać
+      if (submitAfterConfirm) {
+        submitAfterConfirm = false;
+        return;
+      }
+      // Jeśli formularz jest poprawny (HTML5), pokaż modal i zatrzymaj submit
+      if (form.checkValidity()) {
+        e.preventDefault();
+        modal.classList.remove('hidden');
+      }
+      // Jeśli niepoprawny, pozwól przeglądarce pokazać błędy
     });
-  });
 
-  yesBtn.addEventListener('click', function() {
-    modal.classList.add('hidden');
-    if (formToSubmit) formToSubmit.submit();
-  });
-
-  noBtn.addEventListener('click', function() {
-    modal.classList.add('hidden');
-    formToSubmit = null;
-  });
-
-  // Zamknięcie modal po kliknięciu poza oknem
-  modal.addEventListener('click', function(e) {
-    if (e.target === modal) {
+    yesBtn.addEventListener('click', function() {
       modal.classList.add('hidden');
-      formToSubmit = null;
-    }
-  });
+      submitAfterConfirm = true;
+      form.requestSubmit(); // wyślij ponownie, tym razem przejdzie
+    });
+
+    noBtn.addEventListener('click', function() {
+      modal.classList.add('hidden');
+      submitAfterConfirm = false;
+    });
+
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+        submitAfterConfirm = false;
+      }
+    });
+  }
 });
 </script>
 {% endblock %}
