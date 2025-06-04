@@ -54,10 +54,10 @@ class Inventory(models.Model):
         return f"{self.product.name} - {self.stock_level}"
 
 class Order(models.Model):
-    diameter = models.CharField(max_length=10)
-    shape = models.CharField(max_length=20)
-    size = models.CharField(max_length=2)
-    color = models.CharField(max_length=50)
+    diameter = models.CharField(max_length=10, blank=True)
+    shape = models.CharField(max_length=20, blank=True)
+    size = models.CharField(max_length=2, blank=True)
+    color = models.CharField(max_length=50, blank=True)
     quantity_to_assemble = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     is_produced = models.BooleanField(default=False)
@@ -66,13 +66,13 @@ class Order(models.Model):
     def clean(self):
         errors = {}
         if not self.diameter:
-            errors['diameter'] = "To pole jest wymagane."
+            errors['diameter'] = "Średnica jest wymagana."
         if not self.shape:
-            errors['shape'] = "To pole jest wymagane."
+            errors['shape'] = "Kształt jest wymagany."
         if not self.size:
-            errors['size'] = "To pole jest wymagane."
+            errors['size'] = "Rozmiar jest wymagany."
         if not self.color:
-            errors['color'] = "To pole jest wymagane."
+            errors['color'] = "Kolor jest wymagany."
         if not self.quantity_to_assemble or self.quantity_to_assemble <= 0:
             errors['quantity_to_assemble'] = "Ilość musi być liczbą dodatnią większą od zera."
         if errors:
